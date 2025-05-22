@@ -1,0 +1,24 @@
+name: Go Server CI
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "go-api-gateway/**"
+      - ".github/workflows/go-api-gateway-ci.yml"
+
+jobs:
+  style:
+    name: Style Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.24"
+
+      - name: Check Go Formatting Style
+        run: test -z $(go fmt ./...)

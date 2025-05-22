@@ -1,0 +1,19 @@
+.vscode
+.env
+
+# Database ignores
+# ==========================
+database
+
+# LLM-service ignores
+# ==========================
+# Python-generated files
+/llm-service/__pycache__/
+/llm-service/*.py[oc]
+/llm-service/build/
+/llm-service/dist/
+/llm-service/wheels/
+/llm-service/*.egg-info
+
+# Virtual environments
+/llm-service/.venv

@@ -1,0 +1,84 @@
+services:
+  mongo:
+    image: mongo
+    container_name: mongodb-swanlake
+    volumes:
+      - ./database/mongodb:/data/db
+    ports:
+      - "27017:27017"
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - adersim-net
+
+  mongo-express:
+    image: mongo-express
+    container_name: mongoexpress-swanlake
+    restart: always
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    networks:
+      - adersim-net
+
+  # qdrantdb:
+  #   container_name: qdrant-swanlake
+  #   image: qdrant/qdrant
+  #   restart: always
+  #   volumes:
+  #     - ./database/qdrant:/qdrant/storage
+  #   ports:
+  #     - "6333:6333"
+  #     - "6334:6334"
+  #   networks:
+  #     - adersim-net
+
+  # backend:
+  #   build: 
+  #     context: ./backend
+  #     dockerfile: Dockerfile
+  #   container_name: backend-swanlake
+  #   volumes:
+  #     - ./backend/src:/app/src
+  #     - ./backend/topic_models:/app/topic_models
+  #   ports:
+  #     - "80:80"
+  #   networks:
+  #     - adersim-net
+  #   depends_on:
+  #     - mongo
+  #     - qdrantdb
+  #   extra_hosts:
+  #     - "host.docker.internal:host-gateway"
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu]
+
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: ollama
+  #   volumes:
+  #     - /usr/share/ollama/.ollama/models:/root/.ollama
+  #   ports:
+  #     - "11434:11434"
+  #   pull_policy: always
+  #   tty: true
+  #   restart: always
+  #   networks:
+  #     - adersim-net
+  #   deploy:
+  #     resources:
+  #       reservations:
+  #         devices:
+  #           - driver: nvidia
+  #             count: all
+  #             capabilities: [gpu]
+
+networks:
+  adersim-net:
