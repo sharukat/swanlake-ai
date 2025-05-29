@@ -5,6 +5,7 @@ import { BentoGrid, BentoGridItem } from "@/components/server/bento-grid";
 import { BENTOGRID_ITEMS } from "@/lib/constants";
 import Navigationbar from "@/components/NavigationBar";
 import ChatAssistant from "@/components/client/chatAssistant";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -60,6 +61,7 @@ export default function Home() {
       </BentoGrid>
 
       <ChatAssistant />
+      <Footer />
     </section>
   );
 }

@@ -8,7 +8,6 @@ import {
   Select,
   SelectItem,
   DatePicker,
-  Textarea,
 } from "@heroui/react";
 import { FaLocationArrow } from "react-icons/fa";
 import { now, getLocalTimeZone } from "@internationalized/date";
@@ -18,7 +17,6 @@ export default function ObserverInfo() {
     latitude: number;
     longitude: number;
   } | null>(null);
-  const [value, setValue] = React.useState("");
 
   const getUserLocation = () => {
     if (navigator.geolocation) {
@@ -49,7 +47,7 @@ export default function ObserverInfo() {
           isRequired
           errorMessage="Please enter the first name"
           label="First Name"
-          name="observer_first_name"
+          name="first_name"
           placeholder="Enter your name"
           type="text"
         />
@@ -57,7 +55,7 @@ export default function ObserverInfo() {
           isRequired
           errorMessage="Please enter the last name"
           label="Last Name"
-          name="observer_last_name"
+          name="last_name"
           placeholder="Enter your name"
           type="text"
         />
@@ -68,6 +66,7 @@ export default function ObserverInfo() {
           isRequired
           hideTimeZone
           showMonthAndYearPickers
+          visibleMonths={2}
           defaultValue={now(getLocalTimeZone())}
           label="Observation Date & Time"
           name="observed_date"
@@ -78,7 +77,7 @@ export default function ObserverInfo() {
           isRequired
           label="Observation Day"
           placeholder="Select the observation day"
-          name="day"
+          name="observed_day"
           //   value={selectedCategory}
           //   onChange={handleCategoryChange}
         >
@@ -92,11 +91,13 @@ export default function ObserverInfo() {
         <Input
           readOnly
           label="Latitude"
+          name="latitude"
           value={userLocation?.latitude?.toString() || ""}
         />
         <Input
           readOnly
           label="Longitude"
+          name="longitude"
           value={userLocation?.longitude?.toString() || ""}
         />
         <Button
@@ -110,13 +111,7 @@ export default function ObserverInfo() {
           Get Location
         </Button>
       </div>
-      <Textarea
-        required
-        label="Observation Note"
-        placeholder="Enter a note about the observation"
-        value={value}
-        onValueChange={setValue}
-      />
+
     </div>
   );
 }

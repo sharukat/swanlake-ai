@@ -23,7 +23,7 @@ export default function SidebarAdmin() {
       <SidebarBody className="justify-between gap-10 pl-5 pt-10">
         <div className="flex flex-1 flex-col overflow-x-hidden overflow-y-auto">
           <Logo />
-          <div className="mt-8 flex flex-col gap-2">
+          <div className="mt-8 flex flex-col gap-5">
             {ADMIN_LINKS.map((link) => (
               <Card
                 key={link.href}
@@ -33,7 +33,7 @@ export default function SidebarAdmin() {
                 <CardHeader>
                   <SidebarLink key={link.href} link={link} />
                 </CardHeader>
-                <CardBody>Hello World</CardBody>
+                <CardBody className="text-sm text-gray-700">{link.body}</CardBody>
               </Card>
             ))}
           </div>

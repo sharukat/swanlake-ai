@@ -1,5 +1,4 @@
 import "./globals.css";
-import Footer from "@/components/Footer";
 import { Providers } from "./providers";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -14,7 +13,6 @@ export default function RootLayout({
         <body>
           <Providers>
             <main className="min-h-screen flex-grow">{children}</main>
-            <Footer />
           </Providers>
         </body>
       </html>

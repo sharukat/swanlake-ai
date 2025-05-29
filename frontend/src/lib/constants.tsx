@@ -24,6 +24,7 @@ export const DAYS: Category[] = [
 ];
 
 
+
 export const NATURE_GROUPS: NatureGroup = {
   birds: [
     { key: "insectivores", label: "Aerial Insectivores" },
@@ -38,11 +39,12 @@ export const NATURE_GROUPS: NatureGroup = {
 
 export const ADMIN_LINKS = [
   {
-    label: "Add Data",
+    label: "Biodiversity Data",
     href: "/admin",
     icon: (
       <IconBrandTabler className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
     ),
+    body: "Contribute to conservation efforts by uploading biodiversity data on birds, trees, and plants found at Markham Swan Lake Park.",
   },
   {
     label: "Water Quality Data",
@@ -50,6 +52,7 @@ export const ADMIN_LINKS = [
     icon: (
       <IconDropletHalf2Filled className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
     ),
+    body: "Stay informed by updating Swan Lake’s water quality data to monitor changes and ensure timely insights into environmental conditions.",
   },
   {
     label: "Drone Footages",
@@ -57,6 +60,7 @@ export const ADMIN_LINKS = [
     icon: (
       <IconDrone className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
     ),
+    body: "Support environmental monitoring by uploading drone footage which will help track changes and enhance conservation efforts.",
   },
 ];
 
@@ -145,5 +149,48 @@ export const DASHBOARD_CONTENT = [
     description:
       "Dive into the water quality data from Swan Lake Park—uncover key insights into temperature trends, pH balance, and turbidity levels that reveal the health of this vital ecosystem. Dive into the water quality data from Swan Lake Park—uncover key insights into temperature trends, pH balance, and turbidity levels that reveal the health of this vital ecosystem.",
     content: (<DashboardItemSkelton path="/bg-2.jpg" />),
+  },
+];
+
+export const PLANT_TYPES = [
+  {
+    key: "seed",
+    label: "Seed / Dormant",
+    description: "Seed is present but not yet germinated.",
+  },
+  {
+    key: "germination",
+    label: "Germination",
+    description: "The seed begins to sprout; radicle (root) and shoot emerge.",
+  },
+  {
+    key: "seedling",
+    label: "Seedling",
+    description: "Young plant with initial leaves (cotyledons or early true leaves).",
+  },
+  {
+    key: "vegetative",
+    label: "Vegetative",
+    description: "Active leaf, stem, and root growth; no flowering yet.",
+  },
+  {
+    key: "budding",
+    label: "Budding / Pre-Flowering",
+    description: "Formation of flower buds but not yet open.",
+  },
+  {
+    key: "flowering",
+    label: "Flowering / Blooming",
+    description: "Flowers are open and reproductive structures are visible.",
+  },
+  {
+    key: "fruiting",
+    label: "Fruiting / Seeding",
+    description: "Fruits or seeds are developing or mature.",
+  },
+  {
+    key: "senescence",
+    label: "Senescence / Dormancy",
+    description: "Plant is aging, drying, or returning to a resting state (common in perennials or seasonal plants).",
   },
 ];
