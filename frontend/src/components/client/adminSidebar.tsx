@@ -7,14 +7,14 @@ import { ADMIN_LINKS } from "@/lib/constants";
 import { IconHome } from "@tabler/icons-react";
 import { motion } from "motion/react";
 import Link from "next/link";
-import Image from "next/image";
+import { Card, CardHeader, CardBody, PressEvent } from "@heroui/react";
 
 export default function SidebarAdmin() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  const handleNavigation = (e: React.MouseEvent, href: string) => {
-    e.preventDefault();
+  const handleNavigation = (e: PressEvent, href: string) => {
+    // e.preventDefault();
     router.push(href);
   };
 
@@ -25,31 +25,18 @@ export default function SidebarAdmin() {
           <Logo />
           <div className="mt-8 flex flex-col gap-2">
             {ADMIN_LINKS.map((link) => (
-              <div
+              <Card
                 key={link.href}
-                onClick={(e) => handleNavigation(e, link.href)}
+                onPress={(e) => handleNavigation(e, link.href)}
+                isPressable
               >
-                <SidebarLink key={link.href} link={link} />
-              </div>
+                <CardHeader>
+                  <SidebarLink key={link.href} link={link} />
+                </CardHeader>
+                <CardBody>Hello World</CardBody>
+              </Card>
             ))}
           </div>
-        </div>
-        <div>
-          <SidebarLink
-            link={{
-              label: "Sharuka Thirimanne",
-              href: "#",
-              icon: (
-                <Image
-                  src="avatar.jpg"
-                  className="h-7 w-7 shrink-0 rounded-full"
-                  width={50}
-                  height={50}
-                  alt="Avatar"
-                />
-              ),
-            }}
-          />
         </div>
       </SidebarBody>
     </Sidebar>

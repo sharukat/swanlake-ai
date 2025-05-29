@@ -1,4 +1,4 @@
-import CrowdDataForm from "@/components/client/crowdDataForm";
+import CrowdDataForm from "@/components/client/birdDataForm";
 
 export default function AdminPage() {
   // const [action, setAction] = useState<string | null>(null);
