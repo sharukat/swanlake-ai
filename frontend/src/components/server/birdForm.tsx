@@ -11,7 +11,7 @@ type Props = {
 export default function BirdForm({ image }: Props) {
   return (
     <FormSubSkelton title="Birds Observation">
-      <div className="flex flex-row gap-5 w-full">
+      <div className="flex xs:flex-col flex-row gap-5 w-full">
         <div className="flex flex-col gap-5 w-full">
           <Input
             isRequired

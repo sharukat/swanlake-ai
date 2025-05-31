@@ -1,7 +1,7 @@
 'use server';
 
 export async function shareBirdData(formData: FormData) {
-    await new Promise((resolve) => setTimeout(resolve, 2000)); // 2000ms = 2 seconds
+    await new Promise((resolve) => setTimeout(resolve, 4000)); // 2000ms = 2 seconds
     const type = formData.get('type') as string
 
     const commonFields = {

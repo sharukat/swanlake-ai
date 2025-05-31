@@ -2,15 +2,12 @@
 
 import React, { useState } from "react";
 import Context from "@/contexts/formContext";
-import { Tabs, Tab } from "@heroui/react";
 import ObserverInfo from "./observerForm";
-import BirdForm from "../server/birdForm";
-import PlantForm from "../server/plantForm";
-import TreeForm from "../server/treeForm";
+import WaterDataForm from "../server/waterDataForm";
 import { shareBirdData } from "@/actions/formSubmissions";
 import FormSubmitButtons from "./formSubmitButtons";
 
-export default function CrowdDataForm() {
+export default function WaterQualityForm() {
   const [image, setImage] = useState<string>("");
   const [selected, setSelected] = React.useState<string>("birds");
   const [userLocation, setUserLocation] = useState<{
@@ -38,27 +35,7 @@ export default function CrowdDataForm() {
             }}
           >
             <ObserverInfo />
-            <input hidden name="type" defaultValue={selected} />
-            <Tabs
-              aria-label="Options"
-              selectedKey={selected}
-              onSelectionChange={handleSelectionChange}
-              radius="full"
-              color="primary"
-              variant="bordered"
-            >
-              <Tab key="birds" title="Birds" className="w-full">
-                <BirdForm image={image} />
-              </Tab>
-
-              <Tab key="trees" title="Trees" className="w-full">
-                <TreeForm image={image} />
-              </Tab>
-
-              <Tab key="plants" title="Plants" className="w-full">
-                <PlantForm image={image} />
-              </Tab>
-            </Tabs>
+            <WaterDataForm image={image} />
             <div className="h-24 w-full"></div>
             <FormSubmitButtons />
           </form>

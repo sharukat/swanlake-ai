@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import ImageUpload from "@/components/client/imageUpload";
-import Context from "@/contexts/imageContext";
+import Context from "@/contexts/formContext";
 import { Camera } from "lucide-react";
 import {
   Form,
@@ -14,13 +14,17 @@ import Image from "next/image";
 
 export default function DroneDataForm() {
   const [image, setImage] = useState<string>("");
+  const [userLocation, setUserLocation] = useState<{
+      latitude: number;
+      longitude: number;
+    } | null>(null);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
   };
 
   return (
-    <Context.Provider value={{ image, setImage }}>
+    <Context.Provider value={{ image, setImage, userLocation, setUserLocation }}>
       <Form
         className="w-full flex flex-col gap-4"
         onReset={() => {

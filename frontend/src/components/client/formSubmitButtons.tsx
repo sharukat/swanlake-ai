@@ -1,26 +1,31 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormStatus } from "react-dom";
-import { Button } from "@heroui/react";
 
 export default function FormSubmitButtons() {
   const { pending } = useFormStatus();
+
+  useEffect(() => {
+    console.log("Form pending status:", pending);
+  }, [pending]);
+
   return (
-    <div className="fixed bottom-0 w-[75vw] bg-slate-700 shadow-xl/30 border rounded-t-2xl p-4 z-50">
+    <div className="fixed bottom-0 xs:w-[25vw] sm:w-[65vw] w-[75vw] bg-slate-700 shadow-xl/30 border rounded-t-2xl p-4 z-50 ">
       <div className="flex gap-2 items-center justify-end">
-        <Button
-          color="warning"
+        <button
+          className="font-semibold bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full"
           type="submit"
-          radius="full"
-          isLoading={pending}
-          isDisabled={pending}
+          disabled={pending}
         >
-          {pending ? "Submitting..." : "Submit"}
-        </Button>
-        <Button type="reset" variant="faded" radius="full">
+          {pending ? "Submitting.." : "Submit"}
+        </button>
+        <button
+          type="reset"
+          className="font-semibold bg-gray-300 hover:bg-gray-400 text-black px-4 py-2 rounded-full"
+        >
           Reset
-        </Button>
+        </button>
       </div>
     </div>
   );

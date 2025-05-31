@@ -1,22 +1,14 @@
 "use client";
 
-import React, { useState } from "react";
-import { DAYS } from "@/lib/constants";
-import {
-  Input,
-  Button,
-  Select,
-  SelectItem,
-  DatePicker,
-} from "@heroui/react";
+import React, { useContext } from "react";
+import Context from "@/contexts/formContext";
+import { Input, Button, DatePicker } from "@heroui/react";
 import { FaLocationArrow } from "react-icons/fa";
 import { now, getLocalTimeZone } from "@internationalized/date";
+import FormSubSkelton from "@/components/server/formSubSkelton";
 
 export default function ObserverInfo() {
-  const [userLocation, setUserLocation] = useState<{
-    latitude: number;
-    longitude: number;
-  } | null>(null);
+  const { userLocation, setUserLocation } = useContext(Context);
 
   const getUserLocation = () => {
     if (navigator.geolocation) {
@@ -37,12 +29,8 @@ export default function ObserverInfo() {
   };
 
   return (
-    <div className="flex flex-col gap-5 border rounded-2xl p-5 relative w-full">
-      <span className="absolute -top-3 left-4 px-2 text-sm font-medium bg-white text-gray-600">
-        Observer Details
-      </span>
-
-      <div className="flex flex-row gap-5 items-center justify-center">
+    <FormSubSkelton title="Observer Details">
+      <div className="flex xs:flex-col flex-row gap-5 items-center justify-center">
         <Input
           isRequired
           errorMessage="Please enter the first name"
@@ -63,7 +51,6 @@ export default function ObserverInfo() {
 
       <div className="flex flex-row gap-5 items-center justify-center">
         <DatePicker
-          isRequired
           hideTimeZone
           showMonthAndYearPickers
           visibleMonths={2}
@@ -72,22 +59,9 @@ export default function ObserverInfo() {
           name="observed_date"
           errorMessage="Please select a date"
         />
-
-        <Select
-          isRequired
-          label="Observation Day"
-          placeholder="Select the observation day"
-          name="observed_day"
-          //   value={selectedCategory}
-          //   onChange={handleCategoryChange}
-        >
-          {DAYS.map((category) => (
-            <SelectItem key={category.key}>{category.label}</SelectItem>
-          ))}
-        </Select>
       </div>
 
-      <div className="flex flex-row gap-5 items-center justify-center">
+      <div className="flex xs:flex-col flex-row gap-5 items-center justify-center">
         <Input
           readOnly
           label="Latitude"
@@ -111,7 +85,6 @@ export default function ObserverInfo() {
           Get Location
         </Button>
       </div>
-
-    </div>
+    </FormSubSkelton>
   );
 }

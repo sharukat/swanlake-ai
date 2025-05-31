@@ -2,7 +2,7 @@
 
 import React, { useRef, useContext } from "react";
 import { Button } from "@heroui/button";
-import Context from "@/contexts/imageContext";
+import Context from "@/contexts/formContext";
 
 interface ImageProps {
   name: string;

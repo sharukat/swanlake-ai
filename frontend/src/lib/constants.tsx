@@ -48,7 +48,7 @@ export const ADMIN_LINKS = [
   },
   {
     label: "Water Quality Data",
-    href: "#",
+    href: "/admin/water",
     icon: (
       <IconDropletHalf2Filled className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
     ),
@@ -194,3 +194,46 @@ export const PLANT_TYPES = [
     description: "Plant is aging, drying, or returning to a resting state (common in perennials or seasonal plants).",
   },
 ];
+
+export const TREE_CONDITIONS = [
+  {
+    key: 'healthy',
+    label: 'Healthy',
+    description: 'Full canopy, strong growth, no visible issues.',
+  },
+  {
+    key: 'fair',
+    label: 'Fair',
+    description: 'Minor stress signs like small dead branches or discoloration.',
+  },
+  {
+    key: 'poor',
+    label: 'Poor',
+    description: 'Sparse foliage or visible damage, declining health.',
+  },
+  {
+    key: 'declining',
+    label: 'Dying / Declining',
+    description: 'Severe stress or disease, likely not recovering.',
+  },
+  {
+    key: 'dead',
+    label: 'Dead',
+    description: 'No leaves or growth; dry, brittle, possibly decaying.',
+  },
+  {
+    key: 'damaged',
+    label: 'Damaged',
+    description: 'Physically harmed by weather, human activity, or animals.',
+  },
+  {
+    key: 'new',
+    label: 'Recently Planted',
+    description: 'Newly planted; not fully established.',
+  },
+  {
+    key: 'unknown',
+    label: 'Unknown',
+    description: 'Condition unclear or hard to determine.',
+  },
+] as const;
