@@ -11,8 +11,8 @@ type Props = {
 export default function WaterDataForm({ image }: Props) {
   return (
     <FormSubSkelton title="Water Quality Observations">
-      <div className="flex xs:flex-col flex-row gap-5 w-full">
-        <div className="flex flex-col gap-5 w-full">
+      <div className="flex flex-col gap-5 w-full">
+        <div className="grid grid-cols-2 gap-5 w-full">
           <NumberInput
             isRequired
             defaultValue={0}
@@ -37,7 +37,7 @@ export default function WaterDataForm({ image }: Props) {
             endContent={
               <div className="flex items-center">
                 <p className="outline-none border-0 bg-transparent text-default-400 text-small">
-                  Celcius
+                  mgL
                 </p>
               </div>
             }
@@ -46,7 +46,7 @@ export default function WaterDataForm({ image }: Props) {
           <NumberInput
             isRequired
             defaultValue={0}
-            name="dissolved_oxygen_mgl"
+            name="dissolved_oxygen_percent"
             label="Dissolved Oxygen Saturation Percentage"
             placeholder="Enter the value"
             formatOptions={{
@@ -63,25 +63,109 @@ export default function WaterDataForm({ image }: Props) {
             endContent={
               <div className="flex items-center">
                 <p className="outline-none border-0 bg-transparent text-default-400 text-small">
-                  Celcius
+                  pH
                 </p>
               </div>
             }
           />
 
-          <Textarea
-            required
-            label="Observation Note"
-            name="observation_note"
-            placeholder="Enter a note about the observation"
+          <NumberInput
+            isRequired
+            defaultValue={0}
+            name="conductivity"
+            label="Conductivity"
+            placeholder="Enter the value"
+            endContent={
+              <div className="flex items-center">
+                <p className="outline-none border-0 bg-transparent text-default-400 text-small">
+                  uScm
+                </p>
+              </div>
+            }
+          />
+
+          <NumberInput
+            isRequired
+            defaultValue={0}
+            name="turbidity"
+            label="Turbidity"
+            placeholder="Enter the value"
+            endContent={
+              <div className="flex items-center">
+                <p className="outline-none border-0 bg-transparent text-default-400 text-small">
+                  NTU
+                </p>
+              </div>
+            }
+          />
+
+          <NumberInput
+            isRequired
+            defaultValue={0}
+            name="secchi_depth"
+            label="Secchi Depth"
+            placeholder="Enter the value"
+            endContent={
+              <div className="flex items-center">
+                <p className="outline-none border-0 bg-transparent text-default-400 text-small">
+                  cm
+                </p>
+              </div>
+            }
+          />
+
+          <NumberInput
+            isRequired
+            defaultValue={0}
+            name="salinity"
+            label="Salinity"
+            placeholder="Enter the value"
+            endContent={
+              <div className="flex items-center">
+                <p className="outline-none border-0 bg-transparent text-default-400 text-small">
+                  ppt
+                </p>
+              </div>
+            }
           />
         </div>
+        <div className="flex xs:flex-col flex-row gap-5 w-full">
+          <div className="flex flex-col gap-5 w-full">
+            <Textarea
+              required
+              label="Observation Note"
+              name="observation_note"
+              placeholder="Enter a note about the observation"
+            />
 
-        <div className="flex flex-col gap-5 w-full items-center justify-center">
-          <ImagePicker image={image} />
-          <ImageUpload name="image" label="Upload Image" />
+            <Textarea
+              required
+              label="Weather Condition"
+              name="weather_condition"
+              placeholder="Enter a note about the weather condition"
+            />
+
+            <NumberInput
+              isRequired
+              defaultValue={0}
+              name="air_temperature"
+              label="Air Temperature"
+              placeholder="Enter the value"
+              endContent={
+                <div className="flex items-center">
+                  <p className="outline-none border-0 bg-transparent text-default-400 text-small">
+                    Celcius
+                  </p>
+                </div>
+              }
+            />
+          </div>
+          <div className="flex flex-col gap-5 w-full items-center justify-center">
+            <ImagePicker image={image} />
+          </div>
         </div>
       </div>
+      <ImageUpload name="image" label="Upload Image" />
     </FormSubSkelton>
   );
 }

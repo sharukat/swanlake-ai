@@ -1,4 +1,5 @@
 import { Category, NatureGroup } from "@/app/models/database-records";
+import { ListItem } from "@/app/models/utility"
 import {
   IconBrandTabler,
   IconDrone,
@@ -56,7 +57,7 @@ export const ADMIN_LINKS = [
   },
   {
     label: "Drone Footages",
-    href: "/admin/drones",
+    href: "/admin/notfound",
     icon: (
       <IconDrone className="h-5 w-5 shrink-0 text-neutral-700 dark:text-neutral-200" />
     ),
@@ -152,7 +153,7 @@ export const DASHBOARD_CONTENT = [
   },
 ];
 
-export const PLANT_TYPES = [
+export const PLANT_TYPES: ListItem[] = [
   {
     key: "seed",
     label: "Seed / Dormant",
@@ -195,7 +196,7 @@ export const PLANT_TYPES = [
   },
 ];
 
-export const TREE_CONDITIONS = [
+export const TREE_CONDITIONS: ListItem[] = [
   {
     key: 'healthy',
     label: 'Healthy',
@@ -235,5 +236,63 @@ export const TREE_CONDITIONS = [
     key: 'unknown',
     label: 'Unknown',
     description: 'Condition unclear or hard to determine.',
+  },
+] as const;
+
+
+export const TREE_TYPES: ListItem[] = [
+  {
+    key: "deciduous",
+    label: "Deciduous",
+    description:
+      "Trees that shed their leaves annually, common in temperate climates. Examples: Maple, Oak, Birch.",
+  },
+  {
+    key: "coniferous",
+    label: "Coniferous",
+    description:
+      "Evergreen trees with needle-like leaves and cones. Examples: Pine, Spruce, Fir.",
+  },
+  {
+    key: "evergreen_broadleaf",
+    label: "Evergreen (Broadleaf)",
+    description:
+      "Trees with broad leaves that stay green year-round. Common in warmer climates. Examples: Magnolia, Live Oak.",
+  },
+  {
+    key: "palm",
+    label: "Palm",
+    description:
+      "Tropical and subtropical trees with tall, unbranched trunks and fan or feather-like leaves. Examples: Coconut Palm, Date Palm.",
+  },
+  {
+    key: "fruit_bearing",
+    label: "Fruit-bearing",
+    description:
+      "Trees that produce edible fruits, either cultivated or growing wild. Examples: Apple, Mango, Pear.",
+  },
+  {
+    key: "flowering",
+    label: "Flowering (Ornamental)",
+    description:
+      "Trees planted for their blossoms and visual appeal. Often bloom seasonally. Examples: Cherry Blossom, Dogwood.",
+  },
+  {
+    key: "shrub_like",
+    label: "Shrub-like Trees",
+    description:
+      "Shorter trees that may resemble large shrubs; often used in landscaping. Examples: Serviceberry, Sumac.",
+  },
+  {
+    key: "wetland",
+    label: "Wetland Trees",
+    description:
+      "Trees that grow in or near waterlogged soils or marshy areas. Examples: Willow, Bald Cypress.",
+  },
+  {
+    key: "unknown",
+    label: "Unknown / Not Sure",
+    description:
+      "For when you're unsure of the tree type or don't recognize the tree.",
   },
 ] as const;

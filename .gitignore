@@ -3,7 +3,8 @@
 
 # Database ignores
 # ==========================
-/backend/database
+/backend/database/mongodb
+/backend/database/redis
 
 # LLM-service ignores
 # ==========================

@@ -30,7 +30,7 @@ export default function ImageUpload({ name, label }: ImageProps) {
   }
 
   return (
-    <>
+    <div className="flex flex-col items-center justify-center w-full">
       <input
         type="file"
         id={name}
@@ -42,13 +42,13 @@ export default function ImageUpload({ name, label }: ImageProps) {
       />
       <Button
         type="button"
-        variant="bordered"
-        className="max-w-xs"
+        className="w-2/4 max-w-sm"
         color="primary"
+        radius="full"
         onPress={handleImageUpload}
       >
         {label}
       </Button>
-    </>
+    </div>
   );
 }

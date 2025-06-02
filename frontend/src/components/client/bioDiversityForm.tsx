@@ -7,7 +7,7 @@ import ObserverInfo from "./observerForm";
 import BirdForm from "../server/birdForm";
 import PlantForm from "../server/plantForm";
 import TreeForm from "../server/treeForm";
-import { shareBirdData } from "@/actions/formSubmissions";
+import { shareBioDiversityData } from "@/actions/formSubmissions";
 import FormSubmitButtons from "./formSubmitButtons";
 
 export default function CrowdDataForm() {
@@ -31,7 +31,7 @@ export default function CrowdDataForm() {
         <div className="flex-1 overflow-y-auto">
           <form
             className="w-full flex flex-col gap-4 items-center justify-center p-4"
-            action={shareBirdData}
+            action={shareBioDiversityData}
             onReset={() => {
               setImage("");
               setUserLocation(null);

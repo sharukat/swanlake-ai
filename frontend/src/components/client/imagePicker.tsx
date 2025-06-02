@@ -9,7 +9,7 @@ type ImageProps = {
 export default function ImagePicker({ image }: ImageProps) {
     return (
           <div className="flex flex-col justify-start">
-            <div className="aspect-square w-64 border border-gray-300 rounded-lg relative overflow-hidden">
+            <div className="aspect-square w-72 border border-gray-300 rounded-lg relative overflow-hidden">
               {!image && (
                 <div className="flex flex-col items-center justify-center h-full">
                   <Camera className="w-8 h-8 text-gray-400" />

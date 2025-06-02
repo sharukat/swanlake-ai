@@ -3,7 +3,8 @@
 
 # Database ignores
 # ==========================
-database
+database/mongodb
+database/redis
 
 # LLM-service ignores
 # ==========================

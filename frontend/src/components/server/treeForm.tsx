@@ -7,7 +7,7 @@ import {
   SelectItem,
   NumberInput,
 } from "@heroui/react";
-import { TREE_CONDITIONS } from "@/lib/constants";
+import { TREE_CONDITIONS, TREE_TYPES } from "@/lib/constants";
 import ImagePicker from "../client/imagePicker";
 import FormSubSkelton from "./formSubSkelton";
 
@@ -17,9 +17,9 @@ type Props = {
 
 export default function TreeForm({ image }: Props) {
   return (
-    <FormSubSkelton title="Plants Observation">
-      <div className="flex xs:flex-col flex-row gap-5 w-full">
-        <div className="flex flex-col gap-5 w-full">
+    <FormSubSkelton title="Trees Observation">
+      <div className="flex flex-col gap-5 w-full">
+        <div className="grid grid-cols-2 gap-5 w-full">
           <Input
             isRequired
             errorMessage="Please enter a name"
@@ -38,11 +38,11 @@ export default function TreeForm({ image }: Props) {
 
           <Select
             isRequired
-            label="Plant Type"
-            placeholder="Select the plant type"
-            name="plant_type"
+            label="Tree Type"
+            placeholder="Select the tree type"
+            name="tree_type"
           >
-            {TREE_CONDITIONS.map((category) => (
+            {TREE_TYPES.map((category) => (
               <SelectItem key={category.key} textValue={category.label}>
                 <div className="flex flex-col">
                   <h3 className="font-semibold text-sm">{category.label}</h3>
@@ -80,6 +80,13 @@ export default function TreeForm({ image }: Props) {
             }}
           />
 
+          <Input
+            label="Tree Crown Shape"
+            name="tree_crown_shape"
+            placeholder="Enter the tree crown shape"
+            type="text"
+          />
+
           <Select
             isRequired
             label="Tree Condition"
@@ -98,19 +105,42 @@ export default function TreeForm({ image }: Props) {
             ))}
           </Select>
 
-          <Textarea
-            required
-            label="Observation Note"
-            name="observation_note"
-            placeholder="Enter a note about the observation"
+          <Input
+            label="Presence of Fruits/Nuts"
+            name="fruits_nuts_presence"
+            placeholder="Fruits or Nuts presence"
+            type="text"
           />
         </div>
+        <div className="flex xs:flex-col flex-row gap-5 w-full">
+          <div className="flex flex-col gap-5 w-full">
+            <Textarea
+              label="Bark Characteristics"
+              name="tree_bark_characteristics"
+              placeholder="Enter the tree crown shape"
+            />
 
-        <div className="flex flex-col gap-5 w-full items-center justify-center">
-          <ImagePicker image={image} />
-          <ImageUpload name="image" label="Upload Image" />
+            <Textarea
+              required
+              label="Leaf Needle Notes"
+              name="leaf_needle_note"
+              placeholder="Enter a note about the leaf and needle"
+            />
+
+            <Textarea
+              required
+              label="Observation Note"
+              name="observation_note"
+              placeholder="Enter a note about the observation"
+            />
+          </div>
+
+          <div className="flex flex-col gap-5 w-full items-center justify-center">
+            <ImagePicker image={image} />
+          </div>
         </div>
       </div>
+      <ImageUpload name="image" label="Upload Image" />
     </FormSubSkelton>
   );
 }

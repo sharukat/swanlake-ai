@@ -11,8 +11,8 @@ type Props = {
 export default function BirdForm({ image }: Props) {
   return (
     <FormSubSkelton title="Birds Observation">
-      <div className="flex xs:flex-col flex-row gap-5 w-full">
-        <div className="flex flex-col gap-5 w-full">
+      <div className="flex flex-col gap-5 w-full">
+        <div className="grid grid-cols-2 gap-5 w-full">
           <Input
             isRequired
             errorMessage="Please enter a name"
@@ -28,28 +28,37 @@ export default function BirdForm({ image }: Props) {
             placeholder="Enter the scientific name (if known)"
             type="text"
           />
-
-          <NumberInput
-            isRequired
-            defaultValue={1}
-            name="bird_count"
-            label="Count observed"
-            placeholder="Enter the amount"
-          />
-
-          <Textarea
-            required
-            label="Observation Note"
-            name="observation_note"
-            placeholder="Enter a note about the observation"
-          />
         </div>
+        <div className="flex xs:flex-col flex-row gap-5 w-full">
+          <div className="flex flex-col gap-5 w-full">
+            <NumberInput
+              isRequired
+              defaultValue={1}
+              name="bird_count"
+              label="Count observed"
+              placeholder="Enter the amount"
+            />
 
-        <div className="flex flex-col gap-5 w-full items-center justify-center">
-          <ImagePicker image={image} />
-          <ImageUpload name="image" label="Upload Image" />
+            <Textarea
+              label="Bird Behavior"
+              name="bird_behavior"
+              placeholder="Enter the bird behavior"
+            />
+
+            <Textarea
+              required
+              label="Observation Note"
+              name="observation_note"
+              placeholder="Enter a note about the observation"
+            />
+          </div>
+
+          <div className="flex flex-col gap-5 w-full items-center justify-center">
+            <ImagePicker image={image} />
+          </div>
         </div>
       </div>
+      <ImageUpload name="image" label="Upload Image" />
     </FormSubSkelton>
   );
 }

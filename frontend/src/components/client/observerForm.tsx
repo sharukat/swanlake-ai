@@ -47,9 +47,7 @@ export default function ObserverInfo() {
           placeholder="Enter your name"
           type="text"
         />
-      </div>
 
-      <div className="flex flex-row gap-5 items-center justify-center">
         <DatePicker
           hideTimeZone
           showMonthAndYearPickers
