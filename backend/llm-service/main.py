@@ -6,7 +6,7 @@ from pydantic import BaseModel
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from src.generate import ResponseGenerator, ChatBot
+from src.generate import ResponseGenerator, ChatBot, HistoryItem
 
 load_dotenv(dotenv_path="../.env")
 
@@ -28,11 +28,6 @@ class LLMInput(BaseModel):
     item: str
     db_data: dict
     context: str
-
-
-class HistoryItem(BaseModel):
-    text: str
-    sender: str
 
 
 class ChatInput(BaseModel):
@@ -73,16 +68,16 @@ async def root(request: Request) -> JSONResponse:
         return JSONResponse(content="Error in request", status_code=500)
 
 
-@app.post("/ai/generate")
-async def generate_resonse(input_data: LLMInput) -> JSONResponse:
-    web_data = None
-    response = ResponseGenerator().generate(
-        search_item=input_data.item,
-        db_data=input_data.db_data,
-        web_data=web_data,
-    )
-    logger.info("Response generation successful")
-    return JSONResponse(content=response, status_code=200)
+# @app.post("/ai/generate")
+# async def generate_resonse(input_data: LLMInput) -> JSONResponse:
+#     web_data = None
+#     response = ResponseGenerator().generate(
+#         search_item=input_data.item,
+#         db_data=input_data.db_data,
+#         web_data=web_data,
+#     )
+#     logger.info("Response generation successful")
+#     return JSONResponse(content=response, status_code=200)
 
 
 @app.post("/ai/chatbot")

@@ -29,11 +29,12 @@ export default function SidebarAdmin() {
                 key={link.href}
                 onPress={(e) => handleNavigation(e, link.href)}
                 isPressable
+                className="bg-slate-600"
               >
                 <CardHeader>
                   <SidebarLink key={link.href} link={link} />
                 </CardHeader>
-                <CardBody className="text-sm text-gray-700">{link.body}</CardBody>
+                <CardBody className="text-sm text-white">{link.body}</CardBody>
               </Card>
             ))}
           </div>
@@ -47,13 +48,13 @@ export const Logo = () => {
   return (
     <Link
       href="/"
-      className="relative z-20 flex items-center space-x-2 py-1 text-sm font-normal text-black"
+      className="relative flex items-center space-x-3 py-1 justify-center"
     >
-      <IconHome />
+      <IconHome className="text-lg text-white" />
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="font-extrabold whitespace-pre text-black dark:text-white"
+        className="font-semibold text-white text-lg"
       >
         Home Page
       </motion.span>

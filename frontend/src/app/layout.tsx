@@ -12,7 +12,7 @@ export default function RootLayout({
       <html lang="en" className="!scroll-smooth">
         <body>
           <Providers>
-            <main className="min-h-screen flex-grow">{children}</main>
+            <main>{children}</main>
           </Providers>
         </body>
       </html>

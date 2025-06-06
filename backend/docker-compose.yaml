@@ -23,6 +23,41 @@ services:
     networks:
       - adersim-net
 
+  redis:
+    image: redis/redis-stack-server:latest
+    container_name: redis-swanlake
+    restart: always
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - ./database/redis:/redis/storage
+    command: redis-server --appendonly yes --maxmemory 512m --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    networks:
+      - adersim-net
+  
+  postgres:
+    image: postgres:16.3-alpine3.20
+    container_name: postgre-swanlake
+    shm_size: 128mb
+    volumes:
+      - ./database/postgre:/var/lib/postgresql/data 
+    ports:
+      - "5431:5432"
+    restart: always
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${POSTGRES_ROOT_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_ROOT_PASSWORD}
+    networks:
+      - adersim-net
+
   # qdrantdb:
   #   container_name: qdrant-swanlake
   #   image: qdrant/qdrant

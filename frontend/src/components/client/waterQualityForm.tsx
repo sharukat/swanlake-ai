@@ -9,7 +9,6 @@ import FormSubmitButtons from "./formSubmitButtons";
 
 export default function WaterQualityForm() {
   const [image, setImage] = useState<string>("");
-  const [selected, setSelected] = React.useState<string>("birds");
   const [userLocation, setUserLocation] = useState<{
     latitude: number;
     longitude: number;

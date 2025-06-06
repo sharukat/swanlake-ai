@@ -4,6 +4,7 @@ function commonFields(formData: FormData) {
     return {
         observer_fname: formData.get('first_name'),
         observer_lname: formData.get('last_name'),
+        observer_email: formData.get('email'),
         observed_date_time: formData.get('observed_date'),
         longitude: formData.get('longitude'),
         latitude: formData.get('latitude'),
@@ -57,7 +58,7 @@ export async function shareBioDiversityData(formData: FormData) {
 
 export async function shareWaterQualityData(formData: FormData) {
 
-    let response = {
+    const response = {
         ...commonFields(formData),
         water_temperature: formData.get('water_temperature'),
         dissolved_oxygen_mgl: formData.get('dissolved_oxygen_mgl'),

@@ -15,7 +15,7 @@ export function Providers({children}: { children: React.ReactNode }) {
 
   return ( isClient ?
     <HeroUIProvider>
-      <ToastProvider />
+      <ToastProvider placement="top-right" />
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
         {children}
       </ThemeProvider>

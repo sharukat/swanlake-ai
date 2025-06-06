@@ -1,5 +1,6 @@
 import "../globals.css";
 import SidebarAdmin from "@/components/client/adminSidebar";
+import { cn } from "@/lib/utils";
 
 export default function RootLayout({
   children,
@@ -7,9 +8,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-row h-screen w-full overflow-hidden">
+    <div
+      className={cn(
+        "mx-auto flex w-full flex-1 flex-col h-screen overflow-hidden bg-slate-700 md:flex-row"
+      )}
+    >
       <SidebarAdmin />
-      <main className="flex-1 overflow-auto">{children}</main>
+      <main
+        className={cn(
+          "relative flex-1 my-5 rounded-3xl w-full overflow-y-auto bg-white",
+        )}
+      >
+        {children}
+      </main>
     </div>
   );
 }

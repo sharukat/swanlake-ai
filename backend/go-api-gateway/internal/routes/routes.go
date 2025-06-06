@@ -30,6 +30,7 @@ func loadServiceRoutes(router chi.Router) {
 	router.Get("/mongo/list/{collection}", h.ListBirds)
 	router.Post("/chat", h.ChatHandlerFunc)
 	router.Get("/generation/{collection}/{name}", h.AIExplorerHandlerFunc)
+	router.Get("/healthcheck", h.HealthCheckHandler)
 
 	router.Post("/mongo", mongoDBHandler.Create)
 

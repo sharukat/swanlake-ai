@@ -1,0 +1,26 @@
+prompts:
+  explorer:
+    user: |-
+      You are an expert in providing information about {search_item} based solely on the context provided below. Please follow these structured steps to generate your response:
+
+      1. First, carefully read and analyze the information provided under "Data."
+      2. Use this data to craft an explanation which is less than 175 words.
+
+      Data:
+      {data}
+
+    version: "1.0"
+    model: llama-3.3-70b-versatile
+    engine: groq
+    temperature: 0
+
+  chat:
+    user: |-
+      You are an expert in providing information about Markham Swan Lake Park. Below is the conversation history.
+      {history}
+
+      Please concise answer to the question.
+      {question}
+
+    version: "1.0"
+    temperature: 0

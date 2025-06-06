@@ -1,8 +1,10 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import React, { useState, createContext, useContext } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { IconMenu2, IconX } from "@tabler/icons-react";
+import Link from "next/link";
 
 interface Links {
   label: string;
@@ -88,11 +90,11 @@ export const DesktopSidebar = ({
     <>
       <motion.div
         className={cn(
-          "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 dark:bg-neutral-800 w-[300px] shrink-0",
+          "h-full px-4 py-4 hidden md:flex md:flex-col bg-slate-700 dark:bg-neutral-800 w-[250px] shrink-0",
           className
         )}
         animate={{
-          width: animate ? (open ? "300px" : "60px") : "300px",
+          width: animate ? (open ? "250px" : "60px") : "250px",
         }}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
@@ -164,10 +166,10 @@ export const SidebarLink = ({
 }) => {
   const { open, animate } = useSidebar();
   return (
-    <a
+    <Link
       href={link.href}
       className={cn(
-        "flex items-center justify-start gap-2  group/sidebar py-2",
+        "flex text-neutral-200 items-center justify-start gap-2  group/sidebar py-2",
         className
       )}
       {...props}
@@ -179,10 +181,10 @@ export const SidebarLink = ({
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
           opacity: animate ? (open ? 1 : 0) : 1,
         }}
-        className="text-neutral-700 dark:text-neutral-200 text-base font-semibold group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+        className="text-neutral-200 dark:text-neutral-200 text-lg group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
       >
         {link.label}
       </motion.span>
-    </a>
+    </Link>
   );
 };

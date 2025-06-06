@@ -7,22 +7,18 @@ import {
   DrawerBody,
   DrawerFooter,
   useDisclosure,
-  Card,
   Button,
   Listbox,
   ListboxItem,
-  CardBody,
-  Image,
 } from "@heroui/react";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Context from "@/contexts/context";
 
 interface AppCardProps {
-  imagePath: string;
   buttonName: string;
 }
 
-export default function AppCard({ imagePath, buttonName }: AppCardProps) {
+export default function DrawerButton({ buttonName }: AppCardProps) {
   const context = useContext(Context);
   const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
   const [collection, setCollection] = useState<string>(() => {
@@ -31,14 +27,21 @@ export default function AppCard({ imagePath, buttonName }: AppCardProps) {
   const [button, setButton] = useState<string>(() => {
     return "name";
   });
+  const [ isDisabled, setIsDisabled ] = useState<boolean>(false)
 
   const handlePress = async (buttonName: string) => {
-    if (buttonName === "Explore Birds") {
+    if (buttonName === "Birds") {
       setCollection("birds");
+      setIsDisabled(false)
       await context.fetchNames("birds");
-    } else if (buttonName === "Explore Plants") {
+    } else if (buttonName === "Plants") {
       setCollection("plants");
-      await context.fetchNames("plants");
+      setIsDisabled(true)
+      // await context.fetchNames("plants");
+    } else if (buttonName === "Trees") {
+      setCollection("trees");
+      setIsDisabled(true)
+      // await context.fetchNames("tress");
     } else {
       console.error("Invalid button name");
     }
@@ -57,25 +60,16 @@ export default function AppCard({ imagePath, buttonName }: AppCardProps) {
 
   return (
     <div className="flex flex-col">
-      <Card
-        isBlurred
-        className="border-none bg-background/60 max-w-[610px]"
-        radius="lg"
-        isPressable
+      <Button
+        radius="full"
+        size="md"
+        color="primary"
+        variant="bordered"
+        isDisabled={isDisabled}
+        className="text-lg"
         onPress={() => handlePress(buttonName)}
-      >
-        <CardBody className="absolute z-10 flex flex-col items-center justify-center">
-          <h4 className="text-white font-medium text-4xl">{buttonName}</h4>
-        </CardBody>
-        <Image
-          removeWrapper
-          alt="Card background"
-          className="z-0 object-cover opacity-50"
-          height={200}
-          src={imagePath}
-          width={200}
-        />
-      </Card>
+      >{buttonName}
+      </Button>
       <Drawer backdrop="blur" isOpen={isOpen} onOpenChange={onOpenChange}>
         <DrawerContent>
           {(onClose) => (

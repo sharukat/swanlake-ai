@@ -1,9 +1,12 @@
 import os
+import yaml
+from enum import Enum
 from typing import List
 from dotenv import load_dotenv
 from functools import lru_cache
-
+from pydantic import SecretStr, BaseModel
 from langchain_groq import ChatGroq
+from abc import ABC, abstractmethod
 
 # from langchain_ollama import ChatOllama
 from langchain_core.prompts import PromptTemplate
@@ -18,6 +21,17 @@ logger = logging.getLogger(__name__)
 load_dotenv(dotenv_path="../.env")
 
 
+class HistoryItem(BaseModel):
+    text: str
+    sender: str
+
+
+class PromptType(Enum):
+    """Enum for different prompt types"""
+    EXPLORER = "explorer"
+    CHAT = "chat"
+
+
 @lru_cache(maxsize=None)
 class InitModel:
     """Manages the initialization and the access to the LLM instance.
@@ -25,12 +39,35 @@ class InitModel:
     """
 
     def __init__(self):
+        self.prompts_file = "config/prompts.yaml"
+        self.prompts_data = {}
+        self.load_prompts()
         self.model_name = os.getenv("LLM")
+        self.groq_api_key = os.getenv("GROQ_API_KEY")
+
+        if not self.model_name:
+            raise ValueError("LLM environment variable is required")
+
+        if not self.groq_api_key:
+            raise ValueError("GROQ_API_KEY environment is required")
+
         self._model = ChatGroq(
             model=self.model_name,
-            groq_api_key=os.getenv("GROQ_API_KEY"),
+            api_key=SecretStr(self.groq_api_key),
             temperature=0,
         )
+
+    def load_prompts(self):
+        try:
+            with open(self.prompts_file, 'r', encoding='utf-8') as f:
+                self.prompts_data = yaml.safe_load(f)
+            logger.info(f"Loaded prompts from {self.prompts_file}")
+        except FileNotFoundError:
+            logger.error(f"Prompts file not found: {self.prompts_file}")
+            raise
+        except yaml.YAMLError as e:
+            logger.error(f"Error parsing YAML file: {e}")
+            raise
 
     @property
     def model(self) -> ChatGroq:
@@ -41,6 +78,9 @@ class InitModel:
             raise ValueError(err)
         return self._model
 
+    def get_prompt_config(self, prompt_name: str) -> dict:
+        return self.prompts_data['prompts'][prompt_name].copy()
+
 
 class ResponseGenerator:
     """Generates a response based on user input, MongoDB data and web info."""
@@ -49,18 +89,10 @@ class ResponseGenerator:
         self.model_manager = InitModel()
 
     def generate(self, search_item: str, data) -> str:
-        prompt = PromptTemplate.from_template(
-            """
-            You are an expert in providing information about {search_item} based solely on the context provided below. Please follow these structured steps to generate your response:
-
-            1. First, carefully read and analyze the information provided under "Data."
-            2. Use this data to craft an explanation which is less than 175 words.
-
-            Data:
-            {data}
-            """
-        )
-
+        config = self.model_manager.get_prompt_config("explorer")
+        template = config['user']
+        prompt = PromptTemplate.from_template(template)
+        print(prompt)
         chain = prompt | self.model_manager.model | StrOutputParser()
         response = chain.invoke({"search_item": search_item, "data": data})
         return response
@@ -81,17 +113,17 @@ class ChatBot:
     def __init__(self) -> None:
         self.model_manager = InitModel()
 
-    def generate(self, question: str, history: List[str]) -> str:
-        prompt = PromptTemplate.from_template(
-            """
-            You are an expert in providing information about Markham Swan Lake Park. Below is the conversation history.
-            {history}
-
-            Please concise answer to the question.
-            {question}
-            """
-        )
-
+    def generate(self, question: str, history: List[HistoryItem]) -> str:
+        config = self.model_manager.get_prompt_config("chat")
+        template = config['user']
+        prompt = PromptTemplate.from_template(template)
         chain = prompt | self.model_manager.model | StrOutputParser()
         response = chain.invoke({"history": history, "question": question})
         return response
+
+
+class BaseGenerator(ABC):
+    """Abstract class for response generators"""
+
+    def __init__(self) -> None:
+        super().__init__()

@@ -31,7 +31,12 @@ export default function CrowdDataForm() {
         <div className="flex-1 overflow-y-auto">
           <form
             className="w-full flex flex-col gap-4 items-center justify-center p-4"
-            action={shareBioDiversityData}
+            action={async (formData) => {
+              await shareBioDiversityData(formData)
+
+              setImage("");
+              setUserLocation(null);
+            }}
             onReset={() => {
               setImage("");
               setUserLocation(null);

@@ -1,0 +1,13 @@
+models:
+  - type: llama_guard
+    engine: groq
+    model_name: meta-llama/llama-guard-4-12b
+
+rails:
+  input:
+    flows:
+      - llama guard check input
+
+  output:
+    flows:
+      - llama guard check output

@@ -47,7 +47,7 @@ func GetImages(r *http.Request) m.ImageResponse {
 			return
 		}
 
-		validImages, err := validate(context.Background(), filteredImages, 2)
+		validImages, err := validate(context.Background(), filteredImages, 1)
 		if err != nil {
 			ch <- m.ImageResponse{
 				Url:   []string{},

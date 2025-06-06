@@ -47,6 +47,17 @@ export default function ObserverInfo() {
           placeholder="Enter your name"
           type="text"
         />
+      </div>
+
+      <div className="flex xs:flex-col flex-row gap-5 items-center justify-center">
+        <Input
+          isRequired
+          errorMessage="Please enter your email"
+          label="Email"
+          name="email"
+          placeholder="Enter your name"
+          type="email"
+        />
 
         <DatePicker
           hideTimeZone
